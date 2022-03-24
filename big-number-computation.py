@@ -23,10 +23,17 @@ if '.' in sys.argv[1]:
 elif '.' in sys.argv[3]:
     a_s = sys.argv[1]
     b_s, d_s = sys.argv[3].split('.')
+else:
+    a_s = sys.argv[1]
+    b_s = sys.argv[3]
+    d_s = []
 
 a_n = to_int(a_s)
 b_n = to_int(b_s)
-d_n = to_int(d_s)
+if len(d_s) > 0:
+    d_n = to_int(d_s)
+else:
+    d_n = 0
 
 r = a_n + (b_n if sys.argv[2] == '+' else -b_n)
 
