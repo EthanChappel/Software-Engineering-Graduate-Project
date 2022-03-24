@@ -12,6 +12,10 @@ d = d.replace(tzinfo=datetime.timezone(datetime.timedelta(hours=int(sys.argv[2])
 if len(sys.argv) > 4:
     dst_start = datetime.datetime.strptime(sys.argv[3], f)
     dst_end = datetime.datetime.strptime(sys.argv[4], f)
+
+    if dst_start < d and d < dst_end:
+        d += datetime.timedelta(hours=1)
+    
 elif len(sys.argv) > 3:
     print('Warning: Not enough arguments to use daylight saving time mode.', file=sys.stderr)
 
