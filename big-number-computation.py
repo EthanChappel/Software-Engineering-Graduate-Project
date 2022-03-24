@@ -42,4 +42,7 @@ if sys.argv[2] == '-' and d_n > 0:
     d_n = z - d_n
     r += 1
 
-print("%d.%d" % (r, d_n))
+if d_n > 0:
+    print("%d.%d" % (r, d_n))
+else:
+    print(r)
