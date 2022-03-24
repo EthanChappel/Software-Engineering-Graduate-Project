@@ -5,6 +5,11 @@ if len(sys.argv) < 3:
     print("Error: Not enough arguments to perform time zone transformation.", file=sys.stderr)
     sys.exit(1)
 
+if int(sys.argv[2]) < -12 or int(sys.argv[2]) > +14:
+    print('Error: Timezone must be within -12 and +14')
+    sys.exit(2)
+
+
 f = '%Y-%m-%dT%H:%M:%S%z'
 d = datetime.datetime.strptime(sys.argv[1], f)
 old_is_utc = d.utcoffset().total_seconds() == 0

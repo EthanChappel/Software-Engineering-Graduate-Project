@@ -24,7 +24,7 @@ Example:
 ```
 ### Transform to another timezone and set daylight savings time start & end.
 ```
-python3 date-time-transformation.py -c <date and time> <offset> <dst start> <dst end>
+python3 date-time-transformation.py -c <date and time> <new UTC offset> <dst start> <dst end>
 ```
 
 # Big Number Computation
