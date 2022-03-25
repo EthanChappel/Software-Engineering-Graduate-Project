@@ -17,7 +17,7 @@ Convert a time to another timezone. Optionally, account for user-defined dayligh
 ### Transform to another timezone.
 All dates are in the ISO 8601 format
 ```
-python3 date-time-transformation.py <date and time> <offset>
+python3 date-time-transformation.py <date and time> <new UTC offset>
 ```
 
 Example:
