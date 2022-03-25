@@ -13,7 +13,7 @@ if int(sys.argv[2]) < -12 or int(sys.argv[2]) > +14:
 f = '%Y-%m-%dT%H:%M:%S%z'
 d = datetime.datetime.strptime(sys.argv[1], f)
 old_is_utc = d.utcoffset().total_seconds() == 0
-d = d.replace(tzinfo=datetime.timezone(datetime.timedelta(hours=int(sys.argv[2])))) - d.utcoffset() + datetime.timedelta(hours=int(sys.argv[2])) + d.utcoffset()
+d = d.replace(tzinfo=datetime.timezone(datetime.timedelta(hours=int(sys.argv[2])))) - d.utcoffset() + datetime.timedelta(hours=int(sys.argv[2]))
 new_is_utc = d.utcoffset().total_seconds() == 0
 
 if len(sys.argv) > 4:
