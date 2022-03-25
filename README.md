@@ -31,7 +31,7 @@ python3 date-time-transformation.py <date and time> <new UTC offset> <dst start>
 ```
 
 # Big Number Computation
-Use python's built in big integer calculations to perform math on large numbers, including calculations with a decimal place in one number.
+Use Python's built in big integer calculations to perform math on large numbers, including calculations with a decimal place in one number.
 ## Functionality
 ### Add or subtract two numbers
 ```
