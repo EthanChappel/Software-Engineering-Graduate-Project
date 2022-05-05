@@ -35,3 +35,12 @@ elif sys.argv[1] == '-r':
     
     with open(sys.argv[3], 'w') as w:
         w.write(re.sub(r"\b%s\b" % sys.argv[4], sys.argv[5], contents))
+elif sys.argv[1] == '-g':
+    with open(sys.argv[2], 'r') as f:
+        p = f.readlines()
+    d = len(str(len(p)))
+    n = 0
+    for s in p:
+        n += 1
+        if re.search(r"\b%s\b" % sys.argv[3], s):
+            print("{n:{d}}:  {s}".format(n=n, d=d, s=s.strip()))
