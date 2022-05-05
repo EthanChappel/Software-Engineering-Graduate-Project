@@ -11,6 +11,11 @@ python3 string-and-words.py -c <text file>
 python3 string-and-words.py -r <text file> <new text file> <old word> <new word>
 ```
 
+### Get lines with a word
+```
+python3 string-and-words.py -g <text file> <word>
+```
+
 # Date & Time Transformation
 Convert a time to another timezone. Optionally, account for user-defined daylight savings start and end times.
 ## Functionality
@@ -33,7 +38,7 @@ python3 date-time-transformation.py <date and time> <new UTC offset> <dst start>
 # Big Number Computation
 Use Python's built in big integer calculations to perform math on large numbers, including calculations with a decimal place in one number.
 ## Functionality
-### Add or subtract two numbers
+### Add, subtract, or multiply two numbers
 ```
 python3 big-number-computation.py <number 1> <operator> <number 2>
 ```
