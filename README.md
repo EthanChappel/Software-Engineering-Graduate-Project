@@ -28,7 +28,7 @@ python3 date-time-transformation.py <date and time> <new UTC offset>
 Example:
 ```
 > python3 date-time-transformation.py 2000-01-01T00:00:00+0000 -6
-1999-12-31T18:00:00-0600
+1999-12-31T18:00:00-0600 Friday
 ```
 ### Transform to another timezone and set daylight savings time start & end.
 ```

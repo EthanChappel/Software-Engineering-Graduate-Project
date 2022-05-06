@@ -29,4 +29,4 @@ if len(sys.argv) > 4:
 elif len(sys.argv) > 3:
     print('Warning: Not enough arguments to use daylight saving time mode.', file=sys.stderr)
 
-print(d.strftime(f))
+print(d.strftime("%s %%A" % f))
