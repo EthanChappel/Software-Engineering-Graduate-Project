@@ -3,17 +3,12 @@ import re
 import string
 import operator
 
-word_count = {}
 
-if sys.argv[1] == '-c':
-    if len(sys.argv) < 3:
-        print("Error: Not enough arguments to perform word count.", file=sys.stderr)
-        sys.exit(1)
-    
-    with open(sys.argv[2], 'r') as f:
-        split = f.read().translate(str.maketrans('', '', string.punctuation)).split()
-    
-    for s in split:
+def word_count(contents):
+    contents = contents.translate(str.maketrans('', '', string.punctuation)).split()
+    word_count = {}
+
+    for s in contents:
         if len(sys.argv) > 4:
             if s == sys.argv[3]:
                 s = sys.argv[4]
@@ -22,25 +17,72 @@ if sys.argv[1] == '-c':
         else:
             word_count[s] += 1
 
-    sorted_count = sorted(word_count.items(), reverse=True, key=operator.itemgetter(1))
-    for k in sorted_count:
-        print("%s: %d" % (k[0], k[1]))
-elif sys.argv[1] == '-r':
-    if len(sys.argv) < 6:
-        print("Error: Not enough arguments to perform word replacment.", file=sys.stderr)
-        sys.exit(2)
-    
-    with open(sys.argv[2], 'r') as f:
-        contents = f.read()
-    
-    with open(sys.argv[3], 'w') as w:
-        w.write(re.sub(r"\b%s\b" % sys.argv[4], sys.argv[5], contents))
-elif sys.argv[1] == '-g':
-    with open(sys.argv[2], 'r') as f:
-        p = f.readlines()
-    d = len(str(len(p)))
+    return sorted(word_count.items(), reverse=True, key=operator.itemgetter(1))
+
+
+
+def word_replacement(old, new, contents):
+    return re.sub(r"\b%s\b" % old, new, contents)
+
+
+def grep_line(word, contents):
+    digits = len(str(len(contents)))
     n = 0
+    r = []
+
     for s in p:
         n += 1
-        if re.search(r"\b%s\b" % sys.argv[3], s):
-            print("{n:{d}}:  {s}".format(n=n, d=d, s=s.strip()))
+        if re.search(r"\b%s\b" % word, s):
+            r.append("{n:{d}}:  {s}".format(n=n, d=digits, s=s.strip()))
+    
+    return r
+
+
+if __name__ == '__main__':
+    if sys.argv[1] == '-c':
+        if len(sys.argv) < 3:
+            print("Error: Not enough arguments to perform word count.", file=sys.stderr)
+            sys.exit(1)
+        
+        try:
+            with open(sys.argv[2], 'r') as f:
+                split = f.read()
+        except FileNotFoundError:
+            print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
+            sys.exit(2)
+
+        sorted_count = word_count(split)
+        for k in sorted_count:
+            print("%s: %d" % (k[0], k[1]))
+
+    # word replacement
+    elif sys.argv[1] == '-r':
+        if len(sys.argv) < 6:
+            print("Error: Not enough arguments to perform word replacment.", file=sys.stderr)
+            sys.exit(3)
+        
+        try:
+            with open(sys.argv[2], 'r') as f:
+                contents = f.read()
+        except FileNotFoundError:
+            print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
+            sys.exit(2)
+
+        new = word_replacement(sys.argv[4], sys.argv[5], contents)
+
+        with open(sys.argv[3], 'w') as f:
+            f.write(new)
+
+    # grepline
+    elif sys.argv[1] == '-g':
+        try:
+            with open(sys.argv[2], 'r') as f:
+                p = f.readlines()
+        except FileNotFoundError:
+            print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
+            sys.exit(2)
+        
+        g = grep_line(sys.argv[3], p)
+        for s in g:
+            print(s)
+        
