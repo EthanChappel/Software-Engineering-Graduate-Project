@@ -20,22 +20,22 @@ def transform_datetime(d, offset, dst_start = None, dst_end = None):
     return d
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print("Error: Not enough arguments to perform time zone transformation.", file=sys.stderr)
-        sys.exit(1)
+    d = datetime.datetime.strptime(sys.argv[1], f)
+    offset = int(sys.argv[2]) if len(sys.argv) > 2 else None
 
-    if int(sys.argv[2]) < -12 or int(sys.argv[2]) > +14:
-        print('Error: Timezone must be within -12 and +14')
-        sys.exit(2)
-
-    elif len(sys.argv) > 5:
+    if len(sys.argv) > 5:
         print('Warning: Not enough arguments to use daylight saving time mode.', file=sys.stderr)
 
-    d = transform_datetime(
-        datetime.datetime.strptime(sys.argv[1], f),
-        int(sys.argv[2]),
-        datetime.datetime.strptime(sys.argv[3], f) if len(sys.argv) > 4 else None,
-        datetime.datetime.strptime(sys.argv[4], f) if len(sys.argv) > 4 else None
-    )
+    if offset != None:
+        if offset < -12 or offset > +14:
+            print('Error: Timezone must be within -12 and +14')
+            sys.exit(2)
+
+        d = transform_datetime(
+            d,
+            offset,
+            datetime.datetime.strptime(sys.argv[3], f) if len(sys.argv) > 4 else None,
+            datetime.datetime.strptime(sys.argv[4], f) if len(sys.argv) > 4 else None
+        )
 
     print(d.strftime("%s %%A" % f))
