@@ -81,6 +81,9 @@ if __name__ == '__main__':
         except FileNotFoundError:
             print("Error: File %s not found." % sys.argv[3], file=sys.stderr)
             sys.exit(2)
+        except IndexError:
+            print("Error: Not enough arguments to perform grepline.", file=sys.stderr)
+            sys.exit(3)
         
         g = grep_line(sys.argv[2], p)
         for s in g:
