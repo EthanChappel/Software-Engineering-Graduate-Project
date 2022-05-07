@@ -65,15 +65,15 @@ if __name__ == '__main__':
             sys.exit(3)
         
         try:
-            with open(sys.argv[2], 'r') as f:
+            with open(sys.argv[4], 'r') as f:
                 contents = f.read()
         except FileNotFoundError:
-            print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
+            print("Error: File %s not found." % sys.argv[4], file=sys.stderr)
             sys.exit(2)
 
-        new = word_replacement(sys.argv[4], sys.argv[5], contents)
+        new = word_replacement(sys.argv[2], sys.argv[3], contents)
 
-        with open(sys.argv[3], 'w') as f:
+        with open(sys.argv[5], 'w') as f:
             f.write(new)
 
     # grepline
