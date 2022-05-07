@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 import pytest
 from big_number_computation import big_number_computation, to_int
 from date_time_transformation import transform_datetime
@@ -43,6 +44,45 @@ def test_big_number_computation_big_subtraction():
 def test_big_number_computation_big_multiplication():
     assert big_number_computation("200000000000000000000000000000000000000000", "*", "100000000000000000000000000000000000000000") \
         == "20000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+
+
+# Datetime transformation
+
+f = '%Y-%m-%dT%H:%M:%S%z'
+
+def test_transform_datetime_outside_dst():
+    assert transform_datetime(
+        datetime.strptime("2000-01-01T00:00:00+0000", f),
+        -6,
+        datetime.strptime("2000-03-01T00:00:00+0000", f),
+        datetime.strptime("2000-11-01T00:00:00+0000", f)
+    ) == datetime(1999, 12, 31, 18, 0, 0, tzinfo=timezone(timedelta(hours=-6)))
+
+def test_transform_datetime_outside_dst():
+    assert transform_datetime(
+        datetime.strptime("2000-07-01T00:00:00+0000", f),
+        -6,
+        datetime.strptime("2000-03-01T00:00:00+0000", f),
+        datetime.strptime("2000-11-01T00:00:00+0000", f)
+    ) == datetime(2000, 6, 30, 19, 0, 0, tzinfo=timezone(timedelta(hours=-6)))
+
+def test_transform_datetime_start_dst():
+    d = datetime.strptime("2000-03-01T00:00:00+0000", f)
+    assert transform_datetime(
+        d,
+        -6,
+        d,
+        datetime.strptime("2000-11-01T00:00:00+0000", f)
+    ) == datetime(2000, 2, 29, 19, 0, 0, tzinfo=timezone(timedelta(hours=-6)))
+
+def test_transform_datetime_end_dst():
+    d = datetime.strptime("2000-11-01T00:00:00+0000", f)
+    assert transform_datetime(
+        d,
+        -6,
+        datetime.strptime("2000-03-01T00:00:00+0000", f),
+        d,
+    ) == datetime(2000, 10, 31, 18, 0, 0, tzinfo=timezone(timedelta(hours=-6)))
 
 
 # String and words
