@@ -85,7 +85,7 @@ class DateTimeTransformationTests(unittest.TestCase):
             datetime(1999, 12, 31, 18, 0, 0, tzinfo=timezone(timedelta(hours=-6)))
         )
 
-    def test_transform_datetime_outside_dst(self):
+    def test_transform_datetime_inside_dst(self):
         self.assertEqual(
             transform_datetime(
                 datetime.strptime("2000-07-01T00:00:00+0000", self.f),
