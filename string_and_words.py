@@ -76,13 +76,13 @@ if __name__ == '__main__':
     # grepline
     elif sys.argv[1] == '-g':
         try:
-            with open(sys.argv[2], 'r') as f:
+            with open(sys.argv[3], 'r') as f:
                 p = f.readlines()
         except FileNotFoundError:
-            print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
+            print("Error: File %s not found." % sys.argv[3], file=sys.stderr)
             sys.exit(2)
         
-        g = grep_line(sys.argv[3], p)
+        g = grep_line(sys.argv[2], p)
         for s in g:
             print(s)
         

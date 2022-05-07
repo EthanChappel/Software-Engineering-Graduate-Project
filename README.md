@@ -13,7 +13,7 @@ python3 string_and_words.py -r <text file> <new text file> <old word> <new word>
 
 ### Get lines with a word
 ```
-python3 string_and_words.py -g <text file> <word>
+python3 string_and_words.py -g <word> <text file>
 ```
 
 # Date & Time Transformation
