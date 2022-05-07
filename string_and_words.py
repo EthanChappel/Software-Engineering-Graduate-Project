@@ -17,7 +17,7 @@ def word_count(contents):
         else:
             word_count[s] += 1
 
-    return sorted(word_count.items(), reverse=True, key=operator.itemgetter(1))
+    return word_count
 
 
 
@@ -29,8 +29,8 @@ def grep_line(word, contents):
     digits = len(str(len(contents)))
     n = 0
     r = []
-
-    for s in p:
+    
+    for s in contents.splitlines():
         n += 1
         if re.search(r"\b%s\b" % word, s):
             r.append("{n:{d}}:  {s}".format(n=n, d=digits, s=s.strip()))
@@ -51,7 +51,7 @@ if __name__ == '__main__':
             print("Error: File %s not found." % sys.argv[2], file=sys.stderr)
             sys.exit(2)
 
-        sorted_count = word_count(split)
+        sorted_count = sorted(word_count(split).items(), reverse=True, key=operator.itemgetter(1))
         for k in sorted_count:
             print("%s: %d" % (k[0], k[1]))
 
