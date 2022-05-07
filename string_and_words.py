@@ -4,14 +4,11 @@ import string
 import operator
 
 
-def word_count(contents):
-    contents = contents.translate(str.maketrans('', '', string.punctuation)).split()
+def word_count(content):
+    content = content.translate(str.maketrans('', '', string.punctuation)).split()
     word_count = {}
 
-    for s in contents:
-        if len(sys.argv) > 4:
-            if s == sys.argv[3]:
-                s = sys.argv[4]
+    for s in content:
         if s not in word_count.keys():
             word_count[s] = 1
         else:
@@ -21,20 +18,20 @@ def word_count(contents):
 
 
 
-def word_replacement(old, new, contents):
-    return re.sub(r"\b%s\b" % old, new, contents)
+def word_replacement(old, new, content):
+    return re.sub(r"\b%s\b" % old, new, content)
 
 
-def grep_line(word, contents):
-    digits = len(str(len(contents)))
+def grep_line(word, content):
+    digits = len(str(len(content)))
     n = 0
     r = []
-    
-    for s in contents.splitlines():
+
+    for s in content.splitlines():
         n += 1
         if re.search(r"\b%s\b" % word, s):
             r.append("{n:{d}}:  {s}".format(n=n, d=digits, s=s.strip()))
-    
+
     return r
 
 
@@ -46,7 +43,7 @@ if __name__ == '__main__':
         if len(sys.argv) < 3:
             print("Error: Not enough arguments to perform word count.", file=sys.stderr)
             sys.exit(1)
-        
+
         try:
             with open(sys.argv[2], 'r') as f:
                 split = f.read()
@@ -63,18 +60,18 @@ if __name__ == '__main__':
         if len(sys.argv) < 6:
             print("Error: Not enough arguments to perform word replacment.", file=sys.stderr)
             sys.exit(3)
-        
+
         try:
             with open(sys.argv[4], 'r') as f:
-                contents = f.read()
+                content = f.read()
         except FileNotFoundError:
             print("Error: File %s not found." % sys.argv[4], file=sys.stderr)
             sys.exit(2)
 
-        new = word_replacement(sys.argv[2], sys.argv[3], contents)
+        replacement = word_replacement(sys.argv[2], sys.argv[3], content)
 
         with open(sys.argv[5], 'w') as f:
-            f.write(new)
+            f.write(replacement)
 
     # grepline
     elif sys.argv[1] == '-g':
@@ -87,8 +84,7 @@ if __name__ == '__main__':
         except IndexError:
             print("Error: Not enough arguments to perform grepline.", file=sys.stderr)
             sys.exit(3)
-        
+
         g = grep_line(sys.argv[2], p)
         for s in g:
             print(s)
-        
