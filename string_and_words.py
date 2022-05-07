@@ -77,7 +77,7 @@ if __name__ == '__main__':
     elif sys.argv[1] == '-g':
         try:
             with open(sys.argv[3], 'r') as f:
-                p = f.readlines()
+                p = f.read()
         except FileNotFoundError:
             print("Error: File %s not found." % sys.argv[3], file=sys.stderr)
             sys.exit(2)
