@@ -17,7 +17,7 @@ def big_number_computation(a, o, b):
     if '.' in a:
         a_s, d_s = a.split('.')
         b_s = b
-    elif '.' in sys.argv[3]:
+    elif '.' in b:
         a_s = a
         b_s, d_s = b.split('.')
     else:
