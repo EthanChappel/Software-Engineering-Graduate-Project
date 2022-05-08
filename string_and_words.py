@@ -23,7 +23,7 @@ def word_replacement(old, new, content):
 
 
 def grep_line(word, content):
-    digits = len(str(len(content)))
+    digits = len(str(len(content))) - 1
     n = 0
     r = []
 
@@ -39,6 +39,8 @@ if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Error: Not enough arguments.")
         sys.exit(4)
+    
+    # word count
     elif sys.argv[1] == '-c':
         if len(sys.argv) < 3:
             print("Error: Not enough arguments to perform word count.", file=sys.stderr)
