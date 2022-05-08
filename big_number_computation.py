@@ -51,7 +51,10 @@ def big_number_computation(a, o, b):
 
 
 if __name__ == '__main__':
-    if sys.argv[2] != '+' and sys.argv[2] != '-' and sys.argv[2] != '*':
+    if len(sys.argv) < 4:
+        print('Not enough arguments to perform computation.', file=sys.stderr)
+        sys.exit(5)
+    elif sys.argv[2] != '+' and sys.argv[2] != '-' and sys.argv[2] != '*':
         print('Error: Operator must be \'+\' or \'-\'', file=sys.stderr)
         sys.exit(2)
 
