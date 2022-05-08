@@ -153,7 +153,7 @@ class StringAndWords(unittest.TestCase):
     def test_grep_line(self):
         self.assertEqual(
             grep_line("cosmos", self.test_text),
-            [' 1:  The cosmos is all that is...']
+            ['1:  The cosmos is all that is...']
         )
 
 
