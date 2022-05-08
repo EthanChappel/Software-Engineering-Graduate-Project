@@ -17,10 +17,14 @@ python3 string_and_words.py -g <word> <text file>
 ```
 
 # Date & Time Transformation
-Convert a time to another timezone. Optionally, account for user-defined daylight savings start and end times.
+Convert a date time to another timezone. Optionally, account for user-defined daylight savings start and end times.
 ## Functionality
+All dates are in the ISO 8601 format.
+### Print date time with day of week.
+```
+python3 date_time_transformation.py <date and time>
+```
 ### Transform to another timezone.
-All dates are in the ISO 8601 format
 ```
 python3 date_time_transformation.py <date and time> <new UTC offset>
 ```
